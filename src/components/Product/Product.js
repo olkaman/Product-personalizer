@@ -1,57 +1,76 @@
 import styles from './Product.module.scss';
-import clsx from 'clsx';
 import Button from '../Button/Button';
+import PropTypes from 'prop-types';
+import ColorTile from '../Colors/ColorTile';
+import SizeTile from '../Sizes/SizeTile';
+import { useState } from 'react';
+import ProductImage from '../productImage/productImage';
 
-const Product = (props) => {
+const Product = ({ colors, title, basePrice, sizes, name }) => {
+  const [currentColor, setCurrentColor] = useState(colors[0]);
+  const [currentSize, setCurrentSize] = useState(sizes[0].name);
+  const [price, setPrice] = useState(basePrice);
+
+  const handleSize = (name) => {
+    setCurrentSize(name);
+  };
+
+  const handlePrice = (additionalPrice) => {
+    const finalPrice = setPrice(basePrice + additionalPrice);
+
+    return finalPrice;
+  };
+
+  const handleColor = (color) => {
+    setCurrentColor(color);
+  };
+
+  const addToCart = (e) => {
+    e.preventDefault();
+
+    console.log('ORDER');
+    console.log('=========');
+    console.log('Name:', title);
+    console.log('Price:', price);
+    console.log('Size:', currentSize);
+    console.log('Color:', currentColor);
+  };
+
   return (
     <article className={styles.product}>
-      <div className={styles.imageContainer}>
-        <img
-          className={styles.image}
-          alt='Kodilla shirt'
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-kodilla--black.jpg`}
-        />
-      </div>
+      <ProductImage alt={title} name={name} currentColor={currentColor} />
       <div>
         <header>
-          <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {props.basePrice}</span>
+          <h2 className={styles.name}>{title}</h2>
+          <span className={styles.price}>Price: {price}$</span>
         </header>
-        <form>
+        <form onSubmit={addToCart}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
-              <li>
-                <button type='button' className={styles.active}>
-                  S
-                </button>
-              </li>
-              <li>
-                <button type='button'>M</button>
-              </li>
-              <li>
-                <button type='button'>L</button>
-              </li>
-              <li>
-                <button type='button'>XL</button>
-              </li>
+              {sizes.map((size) => (
+                <SizeTile
+                  name={size.name}
+                  currentSize={currentSize}
+                  key={size.name}
+                  handleAction={handleSize}
+                  additionalPrice={size.additionalPrice}
+                  changePrice={handlePrice}
+                />
+              ))}
             </ul>
           </div>
           <div className={styles.colors}>
             <h3 className={styles.optionLabel}>Colors</h3>
             <ul className={styles.choices}>
-              <li>
-                <button
-                  type='button'
-                  className={clsx(styles.colorBlack, styles.active)}
+              {colors.map((color) => (
+                <ColorTile
+                  key={color}
+                  color={color}
+                  currentColor={currentColor}
+                  handleAction={handleColor}
                 />
-              </li>
-              <li>
-                <button type='button' className={clsx(styles.colorRed)} />
-              </li>
-              <li>
-                <button type='button' className={clsx(styles.colorWhite)} />
-              </li>
+              ))}
             </ul>
           </div>
           <Button className={styles.button}>
@@ -61,6 +80,13 @@ const Product = (props) => {
       </div>
     </article>
   );
+};
+
+Product.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  basePrice: PropTypes.number.isRequired,
 };
 
 export default Product;

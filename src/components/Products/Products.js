@@ -8,7 +8,15 @@ const Products = () => {
   return (
     <section>
       {products.map((product) => (
-        <Product {...product} />
+        <Product
+          title={product.title}
+          id={product.id}
+          basePrice={product.basePrice}
+          name={product.name}
+          key={product.id}
+          colors={product.colors}
+          sizes={product.sizes}
+        />
       ))}
     </section>
   );
