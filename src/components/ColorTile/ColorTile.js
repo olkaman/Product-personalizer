@@ -16,6 +16,7 @@ const ColorTile = ({ color, currentColor, handleAction }) => {
       <button
         type='button'
         className={clsx(
+          styles.colorButton,
           prepareColorClassName(color),
           currentColor === color && styles.active
         )}

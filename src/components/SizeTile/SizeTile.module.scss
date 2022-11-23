@@ -1,7 +1,9 @@
 @use 'sass:math';
 @import '../../styles/settings.scss';
 
-button {
+button.sizeButton {
+  margin: 12px 6px;
+
   &.active {
     opacity: 1;
     transform: scale(1.2);
@@ -13,6 +15,6 @@ button {
   }
 }
 
-.sizes .choices button:hover {
+button.sizeButton:hover {
   background: rgb(47, 53, 66);
 }

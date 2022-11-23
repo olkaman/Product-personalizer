@@ -1,6 +1,8 @@
 @import './settings.scss';
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -20,4 +22,19 @@ body {
   margin: 0 auto;
 }
 
-@import "./typography.scss";
+button {
+  border: none;
+  color: inherit;
+  font: inherit;
+  background: $color-dark;
+  border-radius: 12px;
+  padding: $base-size;
+  background: rgba(47, 53, 66, 0.5);
+  min-width: $base-size * 3;
+  min-height: $base-size * 3;
+  text-align: center;
+  cursor: pointer;
+  transition: $transition;
+}
+
+@import './typography.scss';

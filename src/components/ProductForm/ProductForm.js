@@ -1,6 +1,6 @@
 import styles from './ProductForm.module.scss';
-import ColorTile from '../Colors/ColorTile';
-import SizeTile from '../Sizes/SizeTile';
+import ColorTile from '../ColorTile/ColorTile';
+import SizeTile from '../SizeTile/SizeTile';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 
@@ -58,6 +58,8 @@ ProductForm.propTypes = {
   handleSize: PropTypes.func.isRequired,
   currentColor: PropTypes.string.isRequired,
   currentSize: PropTypes.string.isRequired,
+  colors: PropTypes.array.isRequired,
+  sizes: PropTypes.array.isRequired,
 };
 
 export default ProductForm;

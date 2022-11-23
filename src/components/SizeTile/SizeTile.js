@@ -17,7 +17,7 @@ const SizeTile = ({
   return (
     <button
       type='button'
-      className={clsx(name === currentSize && styles.active)}
+      className={clsx(styles.sizeButton, name === currentSize && styles.active)}
       onClick={handleClick}
     >
       {name}
