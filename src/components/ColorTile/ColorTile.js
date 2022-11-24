@@ -1,11 +1,14 @@
 import styles from './ColorTile.module.scss';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useMemo } from 'react/cjs/react.production.min';
 
 const ColorTile = ({ color, currentColor, handleAction }) => {
   const prepareColorClassName = (color) => {
     return styles['color' + color[0].toUpperCase() + color.substr(1)];
   };
+
+  //const readyClass = useMemo(() => prepareColorClassName(color), [color]);
 
   const handleClick = () => {
     handleAction(color);
